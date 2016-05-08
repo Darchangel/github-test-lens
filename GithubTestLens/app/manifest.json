@@ -1,15 +1,21 @@
 {
   "manifest_version": 2,
 
-  "name": "One-click Kittens",
-  "description": "This extension demonstrates a browser action with kittens.",
-  "version": "1.0",
+  "name": "Github TestLens",
+  "description": "This extension allows jumping between code and tests when reviewing code in Github.",
+  "version": "0.1",
 
-  "permissions": [
-    "https://secure.flickr.com/"
-  ],
-  "browser_action": {
-    "default_icon": "img/icon.png",
-    "default_popup": "popup.html"
-  }
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches" : [
+        "https://github.com/*/pull/*/files",
+        "https://github.com/*/compare/*"
+      ],
+      "js": [
+        "levenshtein.min.js",
+        "littleElves.js"
+      ]
+    }
+  ]
 }

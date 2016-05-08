@@ -39,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="app\levenshtein.min.js" />
     <Content Include="app\littleElves.js" />
     <Content Include="app\img\icon.png" />
     <Content Include="app\popup.html" />
@@ -49,7 +50,6 @@
     <Content Include="index.htm" />
     <Content Include="Properties\build\ligershark.chrome.targets" />
     <Content Include="screenshots\readme.txt" />
-    <Content Include="scripts\levenshtein.min.js" />
     <None Include="scripts\_references.js" />
     <None Include="scripts\chrome-api-vsdoc.js" />
   </ItemGroup>
