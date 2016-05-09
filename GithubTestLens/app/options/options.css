@@ -1,0 +1,18 @@
+﻿body {
+    padding: 10px;
+}
+
+table, th, td {
+    border: 1px solid darkgrey;
+    border-collapse: collapse;
+}
+
+table {
+    margin: 5px;
+}
+
+th, td {
+    padding: 0.5em;
+}
+
+
