@@ -3,7 +3,9 @@
 Chrome extension to make checking tests in Github pull requests easier.
 Adds buttons to jump between files and their respective code files.
 
-##Please take into account that this is still very much a work in progress
+---
+**Please take into account that this is still very much a work in progress**
+---
 
 The extension works by setting up pairs of regular expressions (javascript format, they're directly converted to JS RegExp objects):
 - The first one matches "code" files. Any captured parts in this regex will be used for the second one.
