@@ -9,10 +9,18 @@
     "storage"
   ],
 
+  "icons": {
+    "16": "img/icon-16.png",
+    "32": "img/icon-32.png",
+    "48": "img/icon-48.png",
+    "64": "img/icon-64.png",
+    "128": "img/icon-128.png"
+  },
+
   "content_scripts": [
     {
       "run_at": "document_end",
-      "matches" : [
+      "matches": [
         "https://github.com/*/pull/*/files",
         "https://github.com/*/compare/*"
       ],
@@ -26,6 +34,6 @@
 
   "options_ui": {
     "page": "options/options.html",
-    "chrome_style":  true
+    "chrome_style": true
   }
 }
