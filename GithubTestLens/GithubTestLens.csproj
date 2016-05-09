@@ -42,6 +42,10 @@
     <Content Include="app\levenshtein.min.js" />
     <Content Include="app\littleElves.js" />
     <Content Include="app\img\icon.png" />
+    <Content Include="app\options\defaults.js" />
+    <Content Include="app\options\options.css" />
+    <Content Include="app\options\options.html" />
+    <Content Include="app\options\options.js" />
     <Content Include="app\popup.html" />
     <Content Include="app\popup.js" />
     <Content Include="Properties\build\lib\Ionic.Zip.DLL" />

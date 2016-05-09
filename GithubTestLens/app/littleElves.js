@@ -1,53 +1,52 @@
-﻿var pairs = [
-    ["([^/]*)\/(.*)\/([^/]*)\.cs$", "$1.Tests?\/$2\/$3Tests?.cs$"] //This will go to config later
-];
+﻿var storage = chrome.storage.sync;
 
-var regex = new RegExp(pairs[0][0]);
-var testReplace = pairs[0][1];
+storage.get(OPTIONS_KEY, optionsLoadedCallback);
 
+function optionsLoadedCallback(retrievedOptions) {
+    var options = retrievedOptions[OPTIONS_KEY] || DEFAULT_OPTIONS;
 
+    options.forEach(pair => applyTestButtons(pair.fileRegex, pair.testRegex));
+}
 
+function applyTestButtons(fileRegex, testRegex) {
+    var regex = new RegExp(fileRegex);
+    var fileElements = Array.from(document.getElementsByClassName("file-info"));
 
+    var fileNameElements = fileElements.map(fileElement => Array.from(fileElement.getElementsByClassName("user-select-contain")))
+                                       .reduce((prev, curr) => prev.concat(curr), []);
 
+    var mainTitleFileNameElements = filterElementsWithMatchingTitleRegex(fileNameElements, regex);
 
+    var candidateTestTitleMatches = mainTitleFileNameElements.map(element => ({
+        mainElement: element,
+        testRegex: new RegExp(element.title.replace(regex, testRegex))
+    }));
 
-var fileElements = Array.from(document.getElementsByClassName("file-info"));
+    var fileNameMatches = candidateTestTitleMatches.map(match => ({
+        mainElement: match.mainElement,
+        testElements: filterElementsWithMatchingTitleRegex(fileNameElements, match.testRegex)
+    }));
 
-var fileNameElements = fileElements.map(fileElement => Array.from(fileElement.getElementsByClassName("user-select-contain")))
-                                   .reduce((prev, curr) => prev.concat(curr), []);
+    fileNameMatches.forEach(pair => {
+        var mainElement = pair.mainElement;
+        var testElement = null;
 
-var mainTitleFileNameElements = filterElementsWithMatchingTitleRegex(fileNameElements, regex);
+        if (pair.testElements.length === 1)
+            testElement = pair.testElements[0];
+        else if (pair.testElements.length > 1)
+            testElement = bestTitleMatch(mainElement.title, pair.testElements);
 
-var candidateTestTitleMatches = mainTitleFileNameElements.map(element => ({
-    mainElement: element,
-    testRegex: new RegExp(element.title.replace(regex, testReplace))
-}));
+        if(testElement != null){
+            var testLinkPair = createButtonPair(testElement, "View tests");
+            testElement.parentElement.insertBefore(testLinkPair.anchor, testElement);
+            mainElement.parentElement.insertBefore(testLinkPair.button, mainElement);
 
-
-var fileNameMatches = candidateTestTitleMatches.map(match => ({
-    mainElement: match.mainElement,
-    testElements: filterElementsWithMatchingTitleRegex(fileNameElements, match.testRegex)
-}));
-
-fileNameMatches.forEach(pair => {
-    var mainElement = pair.mainElement;
-    var testElement = null;
-
-    if (pair.testElements.length === 1)
-        testElement = pair.testElements[0];
-    else if (pair.testElements.length > 1)
-        testElement = bestTitleMatch(mainElement.title, pair.testElements);
-
-    if(testElement != null){
-        var testLinkPair = createButtonPair(testElement, "View tests");
-        testElement.parentElement.insertBefore(testLinkPair.anchor, testElement);
-        mainElement.parentElement.insertBefore(testLinkPair.button, mainElement);
-
-        var mainLinkPair = createButtonPair(mainElement, "View tested code");
-        mainElement.parentElement.insertBefore(mainLinkPair.anchor, mainElement);
-        testElement.parentElement.insertBefore(mainLinkPair.button, testElement);
-    }
-});
+            var mainLinkPair = createButtonPair(mainElement, "View tested code");
+            mainElement.parentElement.insertBefore(mainLinkPair.anchor, mainElement);
+            testElement.parentElement.insertBefore(mainLinkPair.button, testElement);
+        }
+    });
+}
 
 
 function bestTitleMatch(text, candidateElements) {

@@ -5,6 +5,10 @@
   "description": "This extension allows jumping between code and tests when reviewing code in Github.",
   "version": "0.1",
 
+  "permissions": [
+    "storage"
+  ],
+
   "content_scripts": [
     {
       "run_at": "document_end",
@@ -14,8 +18,14 @@
       ],
       "js": [
         "levenshtein.min.js",
+        "options/defaults.js",
         "littleElves.js"
       ]
     }
-  ]
+  ],
+
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style":  true
+  }
 }
