@@ -39,25 +39,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="app\dom.js" />
     <Content Include="app\img\icon-128.png" />
     <Content Include="app\img\icon-16.png" />
     <Content Include="app\img\icon-32.png" />
     <Content Include="app\img\icon-48.png" />
     <Content Include="app\img\icon-64.png" />
     <Content Include="app\levenshtein.min.js" />
-    <Content Include="app\littleElves.js" />
+    <Content Include="app\main.js" />
     <Content Include="app\options\defaults.js" />
     <Content Include="app\options\options.css" />
     <Content Include="app\options\options.html" />
     <Content Include="app\options\options.js" />
     <Content Include="app\popup.html" />
     <Content Include="app\popup.js" />
+    <Content Include="app\search.js" />
     <Content Include="Properties\build\lib\Ionic.Zip.DLL" />
     <Content Include="Properties\build\lib\MSBuild.ExtensionPack.dll" />
     <Content Include="screenshots\screenshot.png" />
     <Content Include="index.htm" />
     <Content Include="Properties\build\ligershark.chrome.targets" />
     <Content Include="screenshots\readme.txt" />
+    <Content Include="scripts\qunit.js" />
+    <Content Include="test\testtest.js" />
     <None Include="scripts\_references.js" />
     <None Include="scripts\chrome-api-vsdoc.js" />
   </ItemGroup>

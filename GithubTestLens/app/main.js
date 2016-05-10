@@ -1,0 +1,49 @@
+﻿var storage = chrome.storage.sync;
+var search = GithubTestLens.search;
+var dom = GithubTestLens.dom;
+
+function main() {
+    storage.get(OPTIONS_KEY, processOptions);
+}
+
+function processOptions(retrievedOptions) {
+    var options = retrievedOptions[OPTIONS_KEY] || DEFAULT_OPTIONS;
+
+    options.forEach(pair => applyTestButtons(pair.fileRegex, pair.testRegex));
+}
+
+function applyTestButtons(fileRegex, testRegex) {
+    var regex = new RegExp(fileRegex);
+    var fileElements = Array.from(document.getElementsByClassName("file-info"));
+
+    var fileNameElements = fileElements.map(fileElement => Array.from(fileElement.getElementsByClassName("user-select-contain")))
+                                       .reduce((prev, curr) => prev.concat(curr), []);
+
+    var mainTitleFileNameElements = search.filterElementsWithTitleMatchingRegex(fileNameElements, regex);
+
+    var candidateTestTitleMatches = mainTitleFileNameElements.map(element => ({
+        mainElement: element,
+        testRegex: new RegExp(element.title.replace(regex, testRegex))
+    }));
+
+    var fileNameMatches = candidateTestTitleMatches.map(match => ({
+        mainElement: match.mainElement,
+        testElements: search.filterElementsWithTitleMatchingRegex(fileNameElements, match.testRegex)
+    }));
+
+    fileNameMatches.forEach(pair => {
+        var mainElement = pair.mainElement;
+        var testElement = null;
+
+        if (pair.testElements.length === 1)
+            testElement = pair.testElements[0];
+        else if (pair.testElements.length > 1)
+            testElement = search.findElementWithClosestTitle(pair.testElements, mainElement.title);
+
+        if(testElement != null) 
+            dom.interlinkElements(mainElement, "View tests", testElement, "View tested code");
+    });
+}
+
+
+main();

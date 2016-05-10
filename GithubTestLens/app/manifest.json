@@ -27,7 +27,9 @@
       "js": [
         "levenshtein.min.js",
         "options/defaults.js",
-        "littleElves.js"
+        "dom.js",
+        "search.js",
+        "main.js"
       ]
     }
   ],
