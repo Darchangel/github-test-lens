@@ -61,7 +61,7 @@
     <Content Include="screenshots\view_tested_code.png" />
     <Content Include="screenshots\view_tests.png" />
     <Content Include="scripts\qunit.js" />
-    <Content Include="test\testtest.js" />
+    <Content Include="test\searchTests.js" />
     <None Include="scripts\_references.js" />
     <None Include="scripts\chrome-api-vsdoc.js" />
   </ItemGroup>
