@@ -48,9 +48,10 @@
     <Content Include="app\levenshtein.min.js" />
     <Content Include="app\main.js" />
     <Content Include="app\options\defaults.js" />
+    <Content Include="app\options\main.js" />
     <Content Include="app\options\options.css" />
     <Content Include="app\options\options.html" />
-    <Content Include="app\options\options.js" />
+    <Content Include="app\options\dom.js" />
     <Content Include="app\popup.html" />
     <Content Include="app\popup.js" />
     <Content Include="app\search.js" />

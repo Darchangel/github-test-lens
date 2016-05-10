@@ -1,11 +1,14 @@
-﻿var OPTIONS_TABLE_ID = "optionsTable";
+﻿var GithubTestLens = GithubTestLens || {};
+GithubTestLens.options = GithubTestLens.options || {};
 
-var storage = chrome.storage.sync;
+var defaults = GithubTestLens.options.defaults;
 
-function loadOptions(retrievedOptions) {
-    var options = retrievedOptions[OPTIONS_KEY] || DEFAULT_OPTIONS;
+GithubTestLens.options.dom = (function() {
 
-    var table = document.getElementById(OPTIONS_TABLE_ID);
+var optionsTableId = "optionsTable";
+
+function setupOptionsTable(options) {
+    var table = document.getElementById(optionsTableId);
     var body = table.tBodies[0];
 
     body.innerHTML = "";
@@ -17,7 +20,7 @@ function loadOptions(retrievedOptions) {
 }
 
 function appendRowToOptionsTable(row) {
-    var table = document.getElementById(OPTIONS_TABLE_ID);
+    var table = document.getElementById(optionsTableId);
     var body = table.tBodies[0];
 
     body.appendChild(row);
@@ -73,17 +76,15 @@ function addRegexRow() {
     appendRowToOptionsTable(row);
 }
 
-function saveOptions() {
-    var table = document.getElementById(OPTIONS_TABLE_ID);
+function parseOptionsFromTable() {
+    var table = document.getElementById(optionsTableId);
     var body = table.tBodies[0];
 
     var cells = body.getElementsByTagName("td");
     var regexps = gatherRegexps(cells);
     var pairs = createRegexPairs(regexps);
 
-    var options = {};
-    options[OPTIONS_KEY] = pairs;
-    storage.set(options, () => console.log("Saved!"));
+    return pairs;
 }
 
 function gatherRegexps(cells) {
@@ -120,8 +121,10 @@ function getValueFromCell(cell) {
     return result;
 }
 
-document.getElementById("add").onclick = addRegexRow;
-document.getElementById("save").onclick = saveOptions;
-
-storage.get(OPTIONS_KEY, loadOptions);
+    return {
+        setupOptionsTable: setupOptionsTable,
+        addRegexRow: addRegexRow,
+        retrieveOptions: parseOptionsFromTable
+    };
+})();
 

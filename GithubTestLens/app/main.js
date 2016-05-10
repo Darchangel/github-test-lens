@@ -1,13 +1,14 @@
 ﻿var storage = chrome.storage.sync;
 var search = GithubTestLens.search;
 var dom = GithubTestLens.dom;
+var defaults = GithubTestLens.options.defaults;
 
 function main() {
-    storage.get(OPTIONS_KEY, processOptions);
+    storage.get(defaults.optionsKey, processOptions);
 }
 
 function processOptions(retrievedOptions) {
-    var options = retrievedOptions[OPTIONS_KEY] || DEFAULT_OPTIONS;
+    var options = retrievedOptions[defaults.optionsKey] || defaults.defaultOptions;
 
     options.forEach(pair => applyTestButtons(pair.fileRegex, pair.testRegex));
 }

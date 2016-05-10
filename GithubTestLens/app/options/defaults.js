@@ -1,7 +1,17 @@
-﻿var OPTIONS_KEY = "github_codelens.options";
+﻿var GithubTestLens = GithubTestLens || {};
+GithubTestLens.options = GithubTestLens.options || {};
 
-var DEFAULT_OPTIONS = [{
-    fileRegex: "([^/]*)\/(.*)\/([^/]*)\.cs$",
-    testRegex: "$1.Tests?\/$2\/$3Tests?.cs$"
-}];
+GithubTestLens.options.defaults =  (function() {
+    var optionsKey = "github_codelens.options";
 
+    var defaultOptions = [{
+        fileRegex: "([^/]*)\/(.*)\/([^/]*)\.cs$",
+        testRegex: "$1.Tests?\/$2\/$3Tests?.cs$"
+    }];
+
+    return {
+        optionsKey: optionsKey,
+        defaultOptions: defaultOptions
+    }
+
+})();
