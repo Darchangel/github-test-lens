@@ -42,6 +42,7 @@
     <Content Include="app\img\icon-128.png" />
     <Content Include="app\img\icon-16.png" />
     <Content Include="app\img\icon-32.png" />
+    <Content Include="app\img\icon-48.png" />
     <Content Include="app\img\icon-64.png" />
     <Content Include="app\levenshtein.min.js" />
     <Content Include="app\littleElves.js" />
