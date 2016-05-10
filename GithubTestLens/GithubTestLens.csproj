@@ -57,10 +57,12 @@
     <Content Include="app\search.js" />
     <Content Include="Properties\build\lib\Ionic.Zip.DLL" />
     <Content Include="Properties\build\lib\MSBuild.ExtensionPack.dll" />
-    <Content Include="screenshots\screenshot.png" />
+    <Content Include="screenshots\options.png" />
     <Content Include="index.htm" />
     <Content Include="Properties\build\ligershark.chrome.targets" />
     <Content Include="screenshots\readme.txt" />
+    <Content Include="screenshots\view_tested_code.png" />
+    <Content Include="screenshots\view_tests.png" />
     <Content Include="scripts\qunit.js" />
     <Content Include="test\testtest.js" />
     <None Include="scripts\_references.js" />
