@@ -26,12 +26,13 @@ function appendRowToOptionsTable(row) {
     body.appendChild(row);
 }
 
-function createRow(regexPair, id) {
+function createRow(regexTriple, id) {
     var row = document.createElement("tr");
     row.id = id;
 
-    row.appendChild(createInputCell(regexPair.fileRegex));
-    row.appendChild(createInputCell(regexPair.testRegex));
+    row.appendChild(createInputCell(regexTriple.name));
+    row.appendChild(createInputCell(regexTriple.fileRegex));
+    row.appendChild(createInputCell(regexTriple.testRegex));
 
     var buttonCell = document.createElement("td");
     buttonCell.appendChild(createRemoveButton(id));
@@ -42,6 +43,7 @@ function createRow(regexPair, id) {
 
 function createNewRow(id) {
     return createRow({
+        name: "",
         fileRegex: "",
         testRegex: ""
     }, id);
@@ -102,10 +104,11 @@ function gatherRegexps(cells) {
 
 function createRegexPairs(regexps) {
     var pairs = [];
-    for (var i = 0; i < regexps.length; i+=2) {
+    for (var i = 0; i < regexps.length; i+=3) {
         pairs.push({
-            fileRegex: regexps[i],
-            testRegex: regexps[i+1]
+            name: regexps[i],
+            fileRegex: regexps[i+1],
+            testRegex: regexps[i+2]
         });
     }
 

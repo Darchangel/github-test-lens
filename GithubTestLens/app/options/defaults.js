@@ -5,6 +5,7 @@ GithubTestLens.options.defaults =  (function() {
     var optionsKey = "github_codelens.options";
 
     var defaultOptions = [{
+        name: "C# example (Default)",
         fileRegex: "([^/]*)\/(.*)\/([^/]*)\.cs$",
         testRegex: "$1.Tests?\/$2\/$3Tests?.cs$"
     }];
