@@ -18,7 +18,8 @@ function applyTestButtons(fileRegex, testRegex) {
     var fileElements = Array.from(document.getElementsByClassName("file-info"));
 
     var fileNameElements = fileElements.map(fileElement => Array.from(fileElement.getElementsByClassName("user-select-contain")))
-                                       .reduce((prev, curr) => prev.concat(curr), []);
+        .reduce((prev, curr) => prev.concat(curr), [])
+        .filter(element => !element.getAttribute(dom.markedDataAttribute));
 
     var mainTitleFileNameElements = search.filterElementsWithTitleMatchingRegex(fileNameElements, regex);
 
@@ -45,6 +46,5 @@ function applyTestButtons(fileRegex, testRegex) {
             dom.interlinkElements(mainElement, "View tests", testElement, "View tested code");
     });
 }
-
 
 main();

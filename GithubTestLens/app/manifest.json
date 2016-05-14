@@ -4,10 +4,13 @@
   "name": "Github TestLens",
   "short_name": "TestLens",
   "description": "This extension allows jumping between code and tests when reviewing code in Github.",
-  "version": "0.4.3",
+  "version": "0.5.0",
 
   "permissions": [
-    "storage"
+    "storage",
+    "*://github.com/*",
+    "tabs",
+    "webNavigation"
   ],
 
   "icons": {
@@ -22,8 +25,7 @@
     {
       "run_at": "document_end",
       "matches": [
-        "https://github.com/*/pull/*/files",
-        "https://github.com/*/compare/*"
+        "*://github.com/*"
       ],
       "js": [
         "levenshtein.min.js",
@@ -34,6 +36,11 @@
       ]
     }
   ],
+
+  "background": {
+    "scripts": [ "background/background.js" ],
+    "persistent": false
+  },
 
   "options_ui": {
     "page": "options/options.html",

@@ -39,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="app\background\background.js" />
     <Content Include="app\dom.js" />
     <Content Include="app\img\icon-128.png" />
     <Content Include="app\img\icon-16.png" />
