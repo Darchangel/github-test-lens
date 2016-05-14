@@ -6,8 +6,8 @@ GithubTestLens.options.defaults =  (function() {
 
     var defaultOptions = [{
         name: "C# example (Default)",
-        fileRegex: "([^/]*)\/(.*)\/([^/]*)\.cs$",
-        testRegex: "$1.Tests?\/$2\/$3Tests?.cs$"
+        fileRegex: "[^/]*/.*/([^/]*).cs$",
+        testRegex: ".*.Tests?/.*/$1Tests?.cs$"
     }];
 
     return {
