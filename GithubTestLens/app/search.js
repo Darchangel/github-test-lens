@@ -2,23 +2,23 @@
 
 GithubTestLens.search = (function() {
 
-    function findElementWithClosestTitle(candidateElements, textToMatch) {
+    function findElementWithClosestPath(candidateElements, textToMatch) {
         var bestCandidate = candidateElements.map(candidate => ({
             candidate: candidate,
-            distance: window.Levenshtein.get(textToMatch, candidate.title)
+            distance: window.Levenshtein.get(textToMatch, candidate.dataset.path)
         })).reduce((prev, curr) => curr.distance < prev.distance ? curr : prev, { candidate: null, distance: Number.MAX_VALUE });
 
         return bestCandidate.candidate;
     }
 
-    function filterElementsWithTitleMatchingRegex(elements, regex) {
+    function filterElementsWithPathMatchingRegex(elements, regex) {
         function innerLoop(elements, result) {
             if (elements.length === 0)
                 return result;
 
             var pivot = elements[0];
 
-            var nextResultArray = regex.test(pivot.title) ?
+            var nextResultArray = regex.test(pivot.dataset.path) ?
                 result.concat([pivot]) :
                 result;
 
@@ -29,7 +29,7 @@ GithubTestLens.search = (function() {
     }
 
     return {
-        filterElementsWithTitleMatchingRegex: filterElementsWithTitleMatchingRegex,
-        findElementWithClosestTitle: findElementWithClosestTitle
+        filterElementsWithPathMatchingRegex: filterElementsWithPathMatchingRegex,
+        findElementWithClosestPath: findElementWithClosestPath
     };
 })();

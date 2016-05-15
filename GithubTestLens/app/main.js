@@ -15,22 +15,19 @@ function processOptions(retrievedOptions) {
 
 function applyTestButtons(fileRegex, testRegex) {
     var regex = new RegExp(fileRegex);
-    var fileElements = Array.from(document.getElementsByClassName("file-info"));
+    var fileNameElements = Array.from(document.getElementsByClassName("file-header"))
+                                .filter(element => !element.dataset[dom.markedDataAttribute]);
 
-    var fileNameElements = fileElements.map(fileElement => Array.from(fileElement.getElementsByClassName("user-select-contain")))
-        .reduce((prev, curr) => prev.concat(curr), [])
-        .filter(element => !element.getAttribute(dom.markedDataAttribute));
-
-    var mainTitleFileNameElements = search.filterElementsWithTitleMatchingRegex(fileNameElements, regex);
+    var mainTitleFileNameElements = search.filterElementsWithPathMatchingRegex(fileNameElements, regex);
 
     var candidateTestTitleMatches = mainTitleFileNameElements.map(element => ({
         mainElement: element,
-        testRegex: new RegExp(element.title.replace(regex, testRegex))
+        testRegex: new RegExp(element.dataset.path.replace(regex, testRegex))
     }));
 
     var fileNameMatches = candidateTestTitleMatches.map(match => ({
         mainElement: match.mainElement,
-        testElements: search.filterElementsWithTitleMatchingRegex(fileNameElements, match.testRegex)
+        testElements: search.filterElementsWithPathMatchingRegex(fileNameElements, match.testRegex)
     }));
 
     fileNameMatches.forEach(pair => {
@@ -40,9 +37,9 @@ function applyTestButtons(fileRegex, testRegex) {
         if (pair.testElements.length === 1)
             testElement = pair.testElements[0];
         else if (pair.testElements.length > 1)
-            testElement = search.findElementWithClosestTitle(pair.testElements, mainElement.title);
+            testElement = search.findElementWithClosestPath(pair.testElements, mainElement.dataset.path);
 
-        if(testElement != null) 
+        if (testElement != null)
             dom.interlinkElements(mainElement, "View tests", testElement, "View tested code");
     });
 }
