@@ -3,8 +3,8 @@
 
   "name": "Github TestLens",
   "short_name": "TestLens",
-  "description": "This extension allows jumping between code and tests when reviewing code in Github.",
-  "version": "0.5.1",
+  "description": "Jump between code and tests when reviewing code in Github.",
+  "version": "0.5.2",
 
   "permissions": [
     "storage",

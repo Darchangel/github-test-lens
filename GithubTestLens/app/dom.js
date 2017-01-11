@@ -42,13 +42,13 @@ GithubTestLens.dom = (function() {
         var firstTarget = getLinkTargetChildElement(firstElement);
         var secondTarget = getLinkTargetChildElement(secondElement);
 
-        var firstAnchor = createAnchorToElement(firstTarget);
+        var firstAnchor = createAnchorToElement(firstElement);
         var firstButton = createButtonLinkToAnchor(firstAnchor.id, textInButtonShownInSecondElement);
         firstTarget.parentElement.insertBefore(firstAnchor, firstTarget);
         secondTarget.parentElement.insertBefore(firstButton, secondTarget);
 
 
-        var secondAnchor = createAnchorToElement(secondTarget);
+        var secondAnchor = createAnchorToElement(secondElement);
         var secondButton = createButtonLinkToAnchor(secondAnchor.id, textInButtonShownInFirstElement);
         secondTarget.parentElement.insertBefore(secondAnchor, secondTarget);
         firstTarget.parentElement.insertBefore(secondButton, firstTarget);
